@@ -24,12 +24,17 @@
   (:require
     [clojure.test :refer :all]
     [clj-time.core :refer [after? date-time interval in-days]]
-    [clj-time.format :refer [unparse formatters]]))
+    [clj-time.format :refer [unparse formatters]]
+    [clj-time.coerce :refer [to-long from-long]]))
 
 (defn distance [dt-a dt-b]
   (if (after? dt-a dt-b)
     (distance dt-b dt-a)
     (in-days (interval dt-a dt-b))))
+
+(defn average [dates]
+  (from-long
+    (/ (reduce + (map to-long dates)) (count dates))))
 
 (def fmt (partial unparse (formatters :date)))
 
@@ -56,6 +61,13 @@
   (is (= 7 (distance (date-time 2013 7 21) (date-time 2013 7 28))))
   (is (= 7 (distance (date-time 2013 7 28) (date-time 2013 7 21))))
   (is (= 0 (distance (date-time 2016 1 19) (date-time 2016 1 19)))))
+
+(deftest check-average
+  (is (= (date-time 2016 11 19)
+         (average
+           (list
+             (date-time 2016 11 18)
+             (date-time 2016 11 20))))))
 
 (deftest check-fmt
   (is (= "2019-02-19" (fmt (date-time 2019 2 19)))))
