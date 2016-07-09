@@ -17,6 +17,8 @@
   :profiles {
     :dev {
       :global-vars {*warn-on-reflection* true}
+      :dependencies [
+        [clj-time "0.12.0"] ]
       :plugins [
         [lein-codox "0.9.5"]
         [lein-cloverage "1.0.6"]]}})
