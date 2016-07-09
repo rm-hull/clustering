@@ -1,4 +1,5 @@
-# Clustering Algorithms [![Build Status](https://travis-ci.org/rm-hull/clustering.svg?branch=master)](http://travis-ci.org/rm-hull/clustering) [![Coverage Status](https://coveralls.io/repos/rm-hull/clustering/badge.svg?branch=master)](https://coveralls.io/r/rm-hull/clustering?branch=master) [![Dependencies Status](https://jarkeeper.com/rm-hull/clustering/status.svg)](https://jarkeeper.com/rm-hull/clustering) [![Downloads](https://jarkeeper.com/rm-hull/clustering/downloads.svg)](https://jarkeeper.com/rm-hull/clustering) [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/clustering.svg)](https://clojars.org/rm-hull/clustering)
+# Clustering Algorithms
+[![Build Status](https://travis-ci.org/rm-hull/clustering.svg?branch=master)](http://travis-ci.org/rm-hull/clustering) [![Coverage Status](https://coveralls.io/repos/rm-hull/clustering/badge.svg?branch=master)](https://coveralls.io/r/rm-hull/clustering?branch=master) [![Dependencies Status](https://jarkeeper.com/rm-hull/clustering/status.svg)](https://jarkeeper.com/rm-hull/clustering) [![Downloads](https://jarkeeper.com/rm-hull/clustering/downloads.svg)](https://jarkeeper.com/rm-hull/clustering) [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/clustering.svg)](https://clojars.org/rm-hull/clustering)
 
 Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure.
 
