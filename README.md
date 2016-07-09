@@ -68,6 +68,7 @@ From: https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-c
 We'll start by trying to cluster a simple one-dimensional set of dates:
 
 ```clojure
+(require '[clustering/qt :as qt])
 (require '[clj-time.core :refer [after? date-time interval in-days])
 (require '[clj-time.format :refer [unparse formatters])
 
@@ -119,7 +120,7 @@ To split these into clusters (with a minimum cluster size of 3), grouped
 roughly into months,
 
 ```clojure
-(def groups (cluster distance test-dataset 31 3))
+(def groups (qt/cluster distance test-dataset 31 3))
 
 (count groups)
 ; => 3
