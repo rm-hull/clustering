@@ -2,7 +2,7 @@
 
   "Pearson's correlation coefficient is the covariance of the two variables
   divided by the product of their standard deviations, and is commonly
-  represented by the Greek letter ρ (rho)
+  represented by the Greek letter ρ (rho).
 
   Developed by Karl Pearson from a related idea introduced by Francis Galton
   in the 1880s, this product-moment correlation coefficient is widely used in
