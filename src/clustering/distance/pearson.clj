@@ -1,4 +1,17 @@
-(ns clustering.distance.pearson)
+(ns clustering.distance.pearson
+
+  "Pearson's correlation coefficient is the covariance of the two variables
+  divided by the product of their standard deviations, and is commonly
+  represented by the Greek letter ρ (rho)
+
+  Developed by Karl Pearson from a related idea introduced by Francis Galton
+  in the 1880s, this product-moment correlation coefficient is widely used in
+  the sciences as a measure of the degree of linear dependence between two
+  variables. Early work on the distribution of the sample correlation
+  coefficient was carried out by Anil Kumar Gain and R. A. Fisher from the
+  University of Cambridge.
+
+  See: https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient")
 
 (defn- sum [xs]
   (reduce + xs))
