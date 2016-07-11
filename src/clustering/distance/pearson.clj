@@ -3,7 +3,7 @@
 (defn- sum [xs]
   (reduce + xs))
 
-(defn sqr [x]
+(defn- sqr [x]
   (* x x))
 
 (defn- sum-product [xs ys]
