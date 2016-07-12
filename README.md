@@ -218,7 +218,49 @@ will be different each time evaluation occurs.)_
 
 ### Hierarchical clustering
 
-> TODO
+Agglomorative clustering seeks to pair up nearest points (according to a chosen
+distace measurement) into a cluster, progressively merging clusters into a
+hierarcht, until there only is a single cluster left.
+
+#### Worked Example
+
+As before, using the date example, we need the `distance` and `average` functions
+as defined previously:
+
+```clojure
+(require '[clustering.hierarchical :as hier])
+(require '[clustering.hierarchical :as hier])
+(require '[clj-time.core :refer [after? date-time interval in-days])
+(require '[clj-time.format :refer [unparse formatters])
+(require '[clj-time.coerce :refer [to-long from-long])
+
+(def test-dataset
+  (hash-set
+    (date-time 2013 7 21)
+    (date-time 2013 7 25)
+    ...)))
+
+(defn distance [dt-a dt-b]
+   ...)
+
+(defn average [dates]
+   ...)
+```
+
+Rather than returning a vector of clusters, hierarchical clustering returns a
+single cluster object with left and right sub-parts that require recursive
+traversal, most easily demonstrated with a suitable data visualization, such as
+a [dendrogram](https://en.wikipedia.org/wiki/Dendrogram):
+
+```clojure
+(def groups (hier/cluster distance average test-dataset))
+
+(write-png
+  (->img group fmt)
+  "doc/dendrogram.png")
+```
+
+![dendrogram](https://rawgithub.com/rm-hull/clustering/master/doc/dendrogram.png)
 
 ## References
 

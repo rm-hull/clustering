@@ -28,6 +28,8 @@
     [clojure.test.check.properties :as prop]
     [clojure.test.check.clojure-test :refer [defspec]]
     [clustering.hierarchical :refer :all]
+    [clustering.data-viz.dendrogram :refer :all]
+    [clustering.data-viz.image :refer :all]
     [clustering.test-helper :refer :all]
     [clj-time.core :refer [date-time]]))
 
@@ -50,9 +52,12 @@
      (print-clusters right (inc n)))))
 
 (comment
-  (def groups1 (cluster distance average test-dataset))
-  (def groups2 (cluster distance average test-dataset))
-  (print-clusters groups1)
-  (print-clusters groups2)
+  (def groups (cluster distance average test-dataset))
+  (print-clusters groups)
+
+  (write-png
+    (->img groups fmt)
+    "doc/dendrogram.png")
 )
+
 
