@@ -20,6 +20,24 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(ns clustering.data-viz.dendrogram)
+(ns clustering.data-viz.image
+  (:import
+    [java.awt Color Graphics2D RenderingHints BasicStroke GraphicsEnvironment]
+    [java.awt.image BufferedImage]
+    [java.awt.geom AffineTransform GeneralPath]
+    [javax.imageio ImageIO]))
 
+(defn ^BufferedImage create-image [w h]
+  (BufferedImage. w h BufferedImage/TYPE_INT_ARGB))
+
+(defn ^Graphics2D create-graphics [^BufferedImage img]
+  (let [g2d (.createGraphics img)]
+    (doto g2d
+      (.setRenderingHint RenderingHints/KEY_STROKE_CONTROL RenderingHints/VALUE_STROKE_NORMALIZE)
+      (.setRenderingHint RenderingHints/KEY_ANTIALIASING RenderingHints/VALUE_ANTIALIAS_ON)
+      (.setRenderingHint RenderingHints/KEY_RENDERING RenderingHints/VALUE_RENDER_QUALITY))
+    g2d))
+
+(defn write-png [^BufferedImage image filename]
+  (ImageIO/write image "png" (clojure.java.io/file filename)))
 
