@@ -229,7 +229,8 @@ as defined previously:
 
 ```clojure
 (require '[clustering.hierarchical :as hier])
-(require '[clustering.hierarchical :as hier])
+(require '[clustering.data-viz.image :refer :all])
+(require '[clustering.data-viz.dendrogram :as dendrogram])
 (require '[clj-time.core :refer [after? date-time interval in-days])
 (require '[clj-time.format :refer [unparse formatters])
 (require '[clj-time.coerce :refer [to-long from-long])
@@ -256,7 +257,7 @@ a [dendrogram](https://en.wikipedia.org/wiki/Dendrogram):
 (def groups (hier/cluster distance average test-dataset))
 
 (write-png
-  (->img group fmt)
+  (dendrogram/->img group fmt)
   "doc/dendrogram.png")
 ```
 
