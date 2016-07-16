@@ -68,7 +68,7 @@ From: https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-c
 We'll start by trying to cluster a simple one-dimensional set of dates:
 
 ```clojure
-(require '[clustering.qt :as qt])
+(require '[clustering.core.qt :as qt])
 (require '[clj-time.core :refer [after? date-time interval in-days])
 (require '[clj-time.format :refer [unparse formatters])
 
@@ -164,7 +164,7 @@ Using the same one-dimensional dataset as the previous example, but
 instead requiring the `clustering/k-means` namespace:
 
 ```clojure
-(require '[clustering.k-means :as k-means])
+(require '[clustering.core.k-means :as k-means])
 (require '[clj-time.core :refer [after? date-time interval in-days])
 (require '[clj-time.format :refer [unparse formatters])
 (require '[clj-time.coerce :refer [to-long from-long])
@@ -228,7 +228,7 @@ As before, using the date example, we need the `distance` and `average` function
 as defined previously:
 
 ```clojure
-(require '[clustering.hierarchical :as hier])
+(require '[clustering.core.hierarchical :as hier])
 (require '[clustering.data-viz.image :refer :all])
 (require '[clustering.data-viz.dendrogram :as dendrogram])
 (require '[clj-time.core :refer [after? date-time interval in-days])

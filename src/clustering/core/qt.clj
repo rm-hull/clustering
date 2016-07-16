@@ -20,29 +20,27 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(ns clustering.qt
+(ns clustering.core.qt
+  "Quality Threshold (QT) clustering algorithm
+  -------------------------------------------
+
+  From: https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1
+
+  1) Initialize the threshold distance allowed for clusters and the
+     minimum cluster size.
+
+  2) Build a candidate cluster for each data point by including the
+     closest point, the next closest, and so on, until the distance
+     of the cluster surpasses the threshold.
+
+  3) Save the candidate cluster with the most points as the first true
+     cluster, and remove all points in the cluster from further
+     consideration.
+
+  4) Repeat with the reduced set of points until no more cluster can
+     be formed having the minimum cluster size."
   (:require
     [clojure.set :refer [difference]]))
-
-;; Quality Threshold (QT) clustering algorithm
-;; -------------------------------------------
-;;
-;; From: https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1
-;;
-;; 1) Initialize the threshold distance allowed for clusters and the
-;;    minimum cluster size.
-;;
-;; 2) Build a candidate cluster for each data point by including the
-;;    closest point, the next closest, and so on, until the distance
-;;    of the cluster surpasses the threshold.
-;;
-;; 3) Save the candidate cluster with the most points as the first true
-;;    cluster, and remove all points in the cluster from further
-;;    consideration.
-;;
-;; 4) Repeat with the reduced set of points until no more cluster can
-;;    be formed having the minimum cluster size.
-;;
 
 (defn candidate-cluster
 

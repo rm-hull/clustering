@@ -20,44 +20,31 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(ns clustering.hierarchical-test
+(ns clustering.core.qt-test
   (:require
     [clojure.test :refer :all]
-    [clojure.test.check :as tc]
-    [clojure.test.check.generators :as gen]
-    [clojure.test.check.properties :as prop]
-    [clojure.test.check.clojure-test :refer [defspec]]
-    [clustering.hierarchical :refer :all]
-    [clustering.data-viz.dendrogram :refer :all]
-    [clustering.data-viz.image :refer :all]
+    [clustering.core.qt :refer :all]
     [clustering.test-helper :refer :all]
     [clj-time.core :refer [date-time]]))
 
-(defn print-clusters
-  ([clust]
-   (print-clusters clust 0))
-
-  ([clust n]
-   (dotimes [i n]
-     (print " "))
-
-   (if (:branch? clust)
-     (println "-")
-     (println (:distance clust) "###" (fmt (:data clust))))
-
-   (when-let [left (:left clust)]
-     (print-clusters left (inc n)))
-
-   (when-let [right (:right clust)]
-     (print-clusters right (inc n)))))
-
-(comment
-  (def groups (cluster distance average test-dataset))
-  (print-clusters groups)
-
-  (write-png
-    (->img groups fmt)
-    "doc/dendrogram.png")
-)
+(deftest check-candidate-cluster
+  (is (empty? (candidate-cluster distance (date-time 2013 7 15) test-dataset 0)))
+  (is (empty? (candidate-cluster distance (date-time 2013 7 15) nil 150)))
+  (is (= (candidate-cluster distance (date-time 2013 7 15) test-dataset 1)
+         (hash-set (date-time 2013 7 14))))
+  (is (= (candidate-cluster distance (date-time 2013 7 15) test-dataset 15)
+         (hash-set
+           (date-time 2013 7 1)
+           (date-time 2013 7 14)
+           (date-time 2013 7 21)
+           (date-time 2013 7 25))))
+  (is (= (candidate-cluster distance (date-time 2013 7 15) test-dataset 31)
+         (hash-set
+           (date-time 2013 7 1)
+           (date-time 2013 7 14)
+           (date-time 2013 7 21)
+           (date-time 2013 7 25)
+           (date-time 2013 7 31)
+           (date-time 2013 8 3)))))
 
 

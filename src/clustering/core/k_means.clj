@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(ns clustering.k-means
+(ns clustering.core.k-means
   (:refer-clojure :exclude [update]))
 
 (defn init-means [k points]

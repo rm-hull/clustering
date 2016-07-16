@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(ns clustering.hierarchical
+(ns clustering.core.hierarchical
   (:require
     [clojure.math.combinatorics :refer [combinations]]))
 

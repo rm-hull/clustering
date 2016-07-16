@@ -20,14 +20,14 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-(ns clustering.k-means-test
+(ns clustering.core.k-means-test
   (:require
     [clojure.test :refer :all]
     [clojure.test.check :as tc]
     [clojure.test.check.generators :as gen]
     [clojure.test.check.properties :as prop]
     [clojure.test.check.clojure-test :refer [defspec]]
-    [clustering.k-means :refer :all]
+    [clustering.core.k-means :refer :all]
     [clustering.test-helper :refer :all]
     [clj-time.core :refer [date-time]]))
 
