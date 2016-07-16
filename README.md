@@ -17,7 +17,7 @@ To build and install the library locally, run:
 
 ### Including in your project
 
-There _will be_ a version hosted at [Clojars](https://clojars.org/rm-hull/clustering).
+There is a version hosted at [Clojars](https://clojars.org/rm-hull/clustering).
 For leiningen include a dependency:
 
 ```clojure
