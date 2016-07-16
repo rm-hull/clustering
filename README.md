@@ -220,7 +220,7 @@ will be different each time evaluation occurs.)_
 
 Agglomorative clustering seeks to pair up nearest points (according to a chosen
 distace measurement) into a cluster, progressively merging clusters into a
-hierarcht, until there only is a single cluster left.
+hierarchy, until there only is a single cluster left.
 
 #### Worked Example
 
