@@ -29,7 +29,6 @@
     (let [arr (vec dataset)
           n   (count arr)]
       (for [i (range k)]
-
         (arr (rand-int n))))))
 
 (defn find-closest
