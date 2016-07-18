@@ -1,4 +1,4 @@
-(defproject rm-hull/clustering "0.1.0"
+(defproject rm-hull/clustering "0.1.1-SNAPSHOT"
   :description "Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure."
   :url "https://github.com/rm-hull/clustering"
   :license {
