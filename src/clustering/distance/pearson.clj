@@ -46,16 +46,16 @@
   −1 is total negative correlation."
 
   [xs ys]
-  (let [len  (count xs)
-        sum1 (sum xs)
-        sum2 (sum ys)
-        num  (- (sum-product xs ys) (/ (* sum1 sum2) len))
-        den  (Math/sqrt  (* (- (sum-squares xs) (/ (sqr sum1) len))
-                            (- (sum-squares ys) (/ (sqr sum2) len))))]
-    (println "len=" len "sum1=" sum1 "sum2=" sum2 "num=" num "den=" den)
-    (if (zero? den)
+  (let [len   (count xs)
+        sumx  (sum xs)
+        sumy  (sum ys)
+        numer (- (sum-product xs ys) (/ (* sumx sumy) len))
+        denom (Math/sqrt (* (- (sum-squares xs) (/ (sqr sumx) len))
+                            (- (sum-squares ys) (/ (sqr sumy) len))))]
+    ;(println "len=" len "sumX=" sumx "sumY=" sumy "numer=" numer "denom=" denom)
+    (if (zero? denom)
       0
-      (/ num den))))
+      (/ numer denom))))
 
 (defn distance
 
