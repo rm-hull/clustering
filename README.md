@@ -49,11 +49,12 @@ require a distance function and a dataset (sequence/collection/...), where:
   some scalar measure of distance between the two points. Typical applications
   include euclidean distance, manhattan distance or pearson distance.
 
-* the **dataset** should be a SEQable collection of data points that should be
+* the **dataset** should be a SEQable collection of data points that would be
   clustered.
 
-The K-means and hierarchical clustering algorithms also require an **averaging** function
-that takes a number of dataset items and creates an average
+The K-means and hierarchical clustering algorithms also require an
+**averaging** function that takes a number of dataset items and creates an
+"average" based on those items.
 
 ### _N_-dimensional clustering
 
@@ -250,7 +251,7 @@ will be different each time evaluation occurs.)_
 ### Hierarchical clustering
 
 Agglomorative clustering seeks to pair up nearest points (according to a chosen
-distace measurement) into a cluster, progressively merging clusters into a
+distance measurement) into a cluster, progressively merging clusters into a
 hierarchy, until there only is a single cluster left.
 
 #### Worked Example
