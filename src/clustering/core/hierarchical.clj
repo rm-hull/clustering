@@ -43,11 +43,11 @@
     []
     (combinations points 2)))
 
-(defn cluster [distance-fn average-fn data]
+(defn cluster [distance-fn average-fn dataset]
   (let [distance-fn (memoize
                       (fn [clust1 clust2]
                         (distance-fn (:data clust1) (:data clust2))))]
-    (loop [clusters (set (map bi-cluster data))]
+    (loop [clusters (set (map bi-cluster dataset))]
       (if (<= (count clusters) 1)
         (first clusters)
         (let [[closest lowest-pair] (find-closest distance-fn clusters)

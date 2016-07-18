@@ -47,14 +47,14 @@
   "Determine which members of the dataset are closed to the candidate
   point within the given threshold"
 
-  [distance-fn point coll threshold]
+  [distance-fn point dataset threshold]
   (let [too-big? #(> (distance-fn point %) threshold)]
-    (set (remove too-big? coll))))
+    (set (remove too-big? dataset))))
 
-(defn most-candidates [distance-fn coll threshold]
+(defn most-candidates [distance-fn dataset threshold]
   (->>
-    coll
-    (map #(candidate-cluster distance-fn % coll threshold))
+    dataset
+    (map #(candidate-cluster distance-fn % dataset threshold))
     (sort-by count >)
     first))
 
@@ -67,9 +67,9 @@
   are formed from the remaining points until no more clusters can be formed
   having the minimum cluster size."
 
-  [distance-fn coll threshold min-size]
+  [distance-fn dataset threshold min-size]
   (loop [clusters []
-         uniq (set coll)]
+         uniq (set dataset)]
     (let [best (most-candidates distance-fn uniq threshold)]
       (if (< (count best) min-size)
         clusters

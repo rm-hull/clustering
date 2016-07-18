@@ -23,10 +23,10 @@
 (ns clustering.core.k-means
   (:refer-clojure :exclude [update]))
 
-(defn init-means [k points]
-  (if (> k (count points))
-    (throw (IllegalArgumentException. (str "Cannot attempt to cluster " (count points) " points into " k " clusters")))
-    (let [arr (vec points)
+(defn init-means [k dataset]
+  (if (> k (count dataset))
+    (throw (IllegalArgumentException. (str "Cannot attempt to cluster " (count dataset) " points into " k " clusters")))
+    (let [arr (vec dataset)
           n   (count arr)]
       (for [i (range k)]
 
@@ -47,10 +47,10 @@
       []
       means)))
 
-(defn classify [distance-fn points means]
+(defn classify [distance-fn dataset means]
   (merge
     (into {} (map #(vector % nil) means))
-    (group-by #(find-closest distance-fn % means) points)))
+    (group-by #(find-closest distance-fn % means) dataset)))
 
 (defn update [average-fn classified old-means]
   (map
@@ -65,16 +65,16 @@
     #(<= % eta)
     (map distance-fn old-means new-means)))
 
-(defn centroids [distance-fn average-fn points means eta]
-  (let [clusters (classify distance-fn points means)
+(defn centroids [distance-fn average-fn dataset means eta]
+  (let [clusters (classify distance-fn dataset means)
         new-means (update average-fn clusters means)]
     (if (converged? distance-fn eta means new-means)
       new-means
-      (recur distance-fn average-fn points new-means eta))))
+      (recur distance-fn average-fn dataset new-means eta))))
 
-(defn cluster [distance-fn average-fn points means eta]
+(defn cluster [distance-fn average-fn dataset means eta]
   (->>
-    (centroids distance-fn average-fn points means eta)
-    (classify distance-fn points)
+    (centroids distance-fn average-fn dataset means eta)
+    (classify distance-fn dataset)
     vals
     vec))
