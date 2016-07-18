@@ -33,19 +33,10 @@
   coefficient was carried out by Anil Kumar Gain and R. A. Fisher from the
   University of Cambridge.
 
-  See: https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient")
+  See: https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient"
 
-(defn- sum [xs]
-  (reduce + xs))
-
-(defn- sqr [x]
-  (* x x))
-
-(defn- sum-product [xs ys]
-  (sum (map #(* %1 %2) xs ys)))
-
-(defn- sum-squares [xs]
-  (sum-product xs xs))
+  (:require
+    [clustering.distance.common :refer :all]))
 
 (defn correlation-coefficient
 
