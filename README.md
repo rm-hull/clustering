@@ -291,9 +291,13 @@ a [dendrogram](https://en.wikipedia.org/wiki/Dendrogram):
 (write-png
   "doc/dendrogram.png"
   (dendrogram/->img group fmt))
+
+(spit
+  "doc/dendrogram.svg"
+  (dendrogram/->svg group fmt))
 ```
 
-![dendrogram](https://rawgithub.com/rm-hull/clustering/master/doc/dendrogram.png)
+![dendrogram](https://rawgithub.com/rm-hull/clustering/master/doc/dendrogram.svg)
 
 ## References
 
