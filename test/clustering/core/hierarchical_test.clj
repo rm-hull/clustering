@@ -56,8 +56,8 @@
   (print-clusters groups)
 
   (write-png
-    (->img groups fmt)
-    "doc/dendrogram.png")
+    "doc/dendrogram.png"
+    (->img groups fmt))
 )
 
 

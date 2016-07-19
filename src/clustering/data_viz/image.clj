@@ -38,6 +38,8 @@
       (.setRenderingHint RenderingHints/KEY_RENDERING RenderingHints/VALUE_RENDER_QUALITY))
     g2d))
 
-(defn write-png [^BufferedImage image filename]
-  (ImageIO/write image "png" (clojure.java.io/file filename)))
-
+(defn write-png
+  "Opens a file-like object, and writes the `BufferedImage` as a PNG
+  (Portable Network Graphics) format image"
+  [f ^BufferedImage image]
+  (ImageIO/write image "png" (clojure.java.io/file f)))

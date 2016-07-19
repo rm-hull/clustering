@@ -289,8 +289,8 @@ a [dendrogram](https://en.wikipedia.org/wiki/Dendrogram):
 (def groups (hier/cluster distance average test-dataset))
 
 (write-png
-  (dendrogram/->img group fmt)
-  "doc/dendrogram.png")
+  "doc/dendrogram.png"
+  (dendrogram/->img group fmt))
 ```
 
 ![dendrogram](https://rawgithub.com/rm-hull/clustering/master/doc/dendrogram.png)
