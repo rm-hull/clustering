@@ -58,6 +58,10 @@
   (write-png
     "doc/dendrogram.png"
     (->img groups fmt))
+
+  (spit
+    "doc/dendrogram.svg"
+    (->svg groups fmt))
 )
 
 

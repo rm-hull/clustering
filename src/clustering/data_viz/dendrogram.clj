@@ -48,7 +48,7 @@
       :w width
       :scaling (double (/ (- width margin) (depth cluster)))}))
 
-(defn draw-node [^Graphics2D g2d render-fn cluster x y scaling]
+(defn draw-node [draw-branch-fn draw-text-fn cluster x y scaling]
   (if (:branch? cluster)
     (let [h1 (* item-height (height (:left cluster)))
           h2 (* item-height (height (:right cluster)))
@@ -57,18 +57,10 @@
           ll (+ x (* scaling (:distance cluster)))
           t (+ top (/ h1 2))
           b (- bottom (/ h2 2))]
-      (do
-        (doto g2d
-          (.drawLine x t x b)
-          (.drawLine x t ll t)
-          (.drawLine x b ll b))
-        (draw-node g2d render-fn (:left cluster) ll t scaling)
-        (draw-node g2d render-fn (:right cluster) ll b scaling)))
-    (.drawString g2d ^String (render-fn (:data cluster)) (int (+ x 5)) (int (+ y 4)))))
-
-(defn draw-dendrogram [^Graphics2D g2d render-fn cluster w h scaling]
-  (.drawLine g2d 0 (/ h 2) 10 (/ h 2))
-  (draw-node g2d render-fn cluster 10 (/ h 2) scaling))
+      (draw-branch-fn t ll b x)
+      (draw-node draw-branch-fn draw-text-fn (:left cluster) ll t scaling)
+      (draw-node draw-branch-fn draw-text-fn (:right cluster) ll b scaling))
+    (draw-text-fn (:data cluster) (int (+ x 5)) (int (+ y 4)))))
 
 (defn ->img
   ([cluster]
@@ -77,26 +69,62 @@
   ([cluster render-fn]
     (let [{:keys [w h scaling]} (calc-bounds cluster)
           img (create-image w h)
-          g2d (create-graphics img)]
+          g2d (create-graphics img)
+          text-fn  (fn [data ^long x ^long y]
+                         (.drawString g2d ^String (render-fn data) x y))
+          brnch-fn (fn [top right bottom left]
+                         (doto g2d
+                           (.drawLine left top left bottom)
+                           (.drawLine left top right top)
+                           (.drawLine left bottom right bottom)))]
       (doto g2d
         (.setBackground Color/WHITE)
         (.setColor Color/BLACK)
         (.clearRect 0 0 w h)
-        (.setStroke (BasicStroke. 1)))
-      (draw-dendrogram g2d render-fn cluster w h scaling)
+        (.setStroke (BasicStroke. 1))
+        (.drawLine 0 (/ h 2) 10 (/ h 2)))
+      (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
       (.dispose g2d)
       img)))
 
-;(defn ->svg [cluster render-fn [w h]]
-;  (^{:cljs hipo/create} html
-;    [:svg
-;     { :xmlns "http://www.w3.org/2000/svg"
-;       :xmlns:xlink "http://www.w3.org/1999/xlink"
-;       :width w :height h
-;       :zoomAndPan "magnify"
-;       :preserveAspectRatio "xMidYMid meet"
-;       :overflow "visible"
-;       :version "1.0" }
-;      [:g ]]))
+(defn round
+  "Round a double to the given precision (number of significant digits)"
+  [precision]
+  (fn [d]
+    (let [factor (Math/pow 10 precision)]
+      (/ (Math/round (* d factor)) factor))))
+
+(defn polyline [line-style points]
+  [:polyline
+    {:points (join "," (map (round 2) points))
+     :style line-style}])
+
+(defn ->svg
+  ([cluster]
+    (->svg cluster str))
+
+  ([cluster render-fn]
+    (let [{:keys [w h scaling]} (calc-bounds cluster)
+          line-style "fill:white;stroke:black;stroke-width:2"
+          collector  (atom [:g])
+          text-fn    (fn [data ^long x ^long y]
+                       (swap! collector conj
+                              [:text {:x x :y y  :font-family "sans-serif"} (render-fn data)]))
+          brnch-fn   (fn [top right bottom left]
+                       (swap! collector conj
+                              (polyline line-style [right top left top left bottom right bottom])))]
+    (swap! collector conj
+           (polyline line-style [ 0 (/ h 2) 10 (/ h 2)]))
+    (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
+    (html
+      [:svg
+       { :xmlns "http://www.w3.org/2000/svg"
+         :xmlns:xlink "http://www.w3.org/1999/xlink"
+         :width w :height h
+         :zoomAndPan "magnify"
+         :preserveAspectRatio "xMidYMid meet"
+         :overflow "visible"
+         :version "1.0" }
+       @collector]))))
 
 
