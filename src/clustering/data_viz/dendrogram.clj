@@ -112,8 +112,8 @@
   ([cluster render-fn]
     (->svg cluster render-fn
            {:font-family "sans-serif"
-            :line-style "fill:none;stroke:black;stroke-width:2"})
-   )
+            :line-style "fill:none;stroke:black;stroke-width:2"}))
+
   ([cluster render-fn options]
     (let [{:keys [w h scaling]} (calc-bounds cluster)
           line-style (:line-style options)
