@@ -28,4 +28,5 @@
 (deftest check-average
   (is (nil? (average nil)))
   (is (nil? (average [])))
+  (is (= [3] (average [[2] [4]])))
   (is (= [2 3] (average [[1 2] [3 4]]))))

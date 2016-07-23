@@ -23,7 +23,7 @@
 (ns clustering.average.simple)
 
 (defn average [dataset]
-  (let [denom (count (first dataset))]
+  (let [denom (count dataset)]
     (if (pos? denom)
       (->>
         dataset
