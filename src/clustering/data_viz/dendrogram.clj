@@ -43,10 +43,11 @@
 
 (defn calc-bounds [cluster]
   (let [width 1024
-        margin 150]
+        margin 150
+        depth (depth cluster)]
     { :h (* item-height (height cluster))
       :w width
-      :scaling (double (/ (- width margin) (depth cluster)))}))
+      :scaling (if (zero? depth) 0 (double (/ (- width margin) depth)))}))
 
 (defn draw-node [draw-branch-fn draw-text-fn cluster x y scaling]
   (if (:branch? cluster)
