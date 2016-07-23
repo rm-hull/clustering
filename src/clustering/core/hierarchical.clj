@@ -57,3 +57,14 @@
             (->
               (apply disj clusters lowest-pair)
               (conj new-cluster))))))))
+
+(defn prefix-walk
+  ([visitor-fn clust]
+   (prefix-walk visitor-fn clust 0))
+
+  ([visitor-fn clust level]
+   (when-not (empty? clust)
+     (visitor-fn clust level)
+     (prefix-walk visitor-fn (:left clust) (inc level))
+     (prefix-walk visitor-fn (:right clust) (inc level)))))
+
