@@ -28,4 +28,4 @@
       (->>
         dataset
         (apply map +)
-        (map #(/ % denom))))))
+        (map #(double (/ % denom)))))))
