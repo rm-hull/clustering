@@ -30,9 +30,10 @@
     [java.awt Graphics2D Color BasicStroke]))
 
 (defn height [cluster]
-  (if (:branch? cluster)
-    (+ (height (:left cluster)) (height (:right cluster)))
-    1))
+  (cond
+    (empty? cluster) 0
+    (:branch? cluster) (+ (height (:left cluster)) (height (:right cluster)))
+    :else 1))
 
 (defn depth [cluster]
   (if (:branch? cluster)
