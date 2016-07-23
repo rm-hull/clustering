@@ -110,15 +110,25 @@
     (->svg cluster str))
 
   ([cluster render-fn]
+    (->svg cluster render-fn
+           {:font-family "sans-serif"
+            :line-style "fill:none;stroke:black;stroke-width:2"})
+   )
+  ([cluster render-fn options]
     (let [{:keys [w h scaling]} (calc-bounds cluster)
-          line-style "fill:white;stroke:black;stroke-width:2"
+          line-style (:line-style options)
+          font-family (:font-family options)
           collector  (atom [:g])
           text-fn    (fn [data ^long x ^long y]
                        (swap! collector conj
-                              [:text {:x x :y y  :font-family "sans-serif"} (render-fn data)]))
+                              [:text
+                               {:x x :y y :font-family font-family}
+                               (render-fn data)]))
           brnch-fn   (fn [top right bottom left]
                        (swap! collector conj
-                              (polyline line-style [right top left top left bottom right bottom])))]
+                              (polyline
+                                line-style
+                                [right top left top left bottom right bottom])))]
     (swap! collector conj
            (polyline line-style [ 0 (/ h 2) 10 (/ h 2)]))
     (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
@@ -132,5 +142,3 @@
          :overflow "visible"
          :version "1.0" }
        @collector]))))
-
-
