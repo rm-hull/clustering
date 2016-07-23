@@ -29,13 +29,17 @@
     [java.awt.geom AffineTransform GeneralPath]
     [java.awt Graphics2D Color BasicStroke]))
 
-(defn height [cluster]
+(defn height
+  "Counts the number of leaf (non-branch) nodes in the cluster"
+  [cluster]
   (cond
     (empty? cluster) 0
     (:branch? cluster) (+ (height (:left cluster)) (height (:right cluster)))
     :else 1))
 
-(defn depth [cluster]
+(defn depth
+  "Calculates the maximum depth by accruing all the branch nodes distances"
+  [cluster]
   (if (:branch? cluster)
     (+ (:distance cluster) (max (depth (:left cluster)) (depth (:right cluster))))
     0))
