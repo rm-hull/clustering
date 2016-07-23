@@ -26,7 +26,8 @@
   (reduce + xs))
 
 (defn diff [x y]
-  (Math/abs (- x y)))
+  (let [res (- x y)]
+    (if (neg? res) (* -1 res) res)))
 
 (defn sqr [x]
   (* x x))
