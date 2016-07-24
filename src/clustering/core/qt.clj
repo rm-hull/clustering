@@ -22,7 +22,6 @@
 
 (ns clustering.core.qt
   "Quality Threshold (QT) clustering algorithm
-  -------------------------------------------
 
   From: https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1
 
@@ -52,6 +51,9 @@
     (set (remove too-big? dataset))))
 
 (defn most-candidates [distance-fn dataset threshold]
+
+  "Finds the largest cluster with the most members"
+
   (->>
     dataset
     (map #(candidate-cluster distance-fn % dataset threshold))
