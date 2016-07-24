@@ -23,8 +23,11 @@
 (ns clustering.data-viz.dendrogram-test
   (:require
     [clojure.test :refer :all]
+    [clojure.java.io :as io]
+    [digest]
     [clustering.core.hierarchical :refer :all]
-    [clustering.data-viz.dendrogram :refer :all]))
+    [clustering.data-viz.dendrogram :refer :all]
+    [clustering.data-viz.image :refer :all]))
 
 (def test-data
   (bi-cluster
@@ -67,3 +70,14 @@
 
 (deftest check->svg
   (is (= (slurp "test/data/dendrogram.svg") (->svg test-data))))
+
+(deftest check->img
+  (let [tmp-file "test/data/__tmp.png"]
+    (try
+      (write-png tmp-file (->img test-data))
+      (is (= (digest/md5 (io/as-file tmp-file))
+             (digest/md5 (io/as-file "test/data/dendrogram.png"))))
+    (finally
+      (io/delete-file tmp-file)))))
+
+
