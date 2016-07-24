@@ -47,4 +47,37 @@
            (date-time 2013 7 31)
            (date-time 2013 8 3)))))
 
+(deftest check-most-candidates
+  (is (empty? (most-candidates distance nil 31)))
+  (is (= (most-candidates distance test-dataset 31)
+         (hash-set
+           (date-time 2013 7 1)
+           (date-time 2013 7 14)
+           (date-time 2013 7 21)
+           (date-time 2013 7 25)
+           (date-time 2013 7 31)
+           (date-time 2013 8 3)))))
 
+(deftest check-cluster
+  (is (empty? (cluster distance nil 31 3)))
+  (is (empty? (cluster distance [(date-time 2016 11 3)] 31 3)))
+  (is (= [(hash-set (date-time 2016 11 3))]
+         (cluster distance [(date-time 2016 11 3)] 31 1)))
+  (is (= [(hash-set
+            (date-time 2013 7 1)
+            (date-time 2013 7 14)
+            (date-time 2013 7 21)
+            (date-time 2013 7 25)
+            (date-time 2013 7 31)
+            (date-time 2013 8 3))
+          (hash-set
+            (date-time 2012 5 28)
+            (date-time 2012 6 2)
+            (date-time 2012 6 6)
+            (date-time 2012 6 7)
+            (date-time 2012 6 9))
+          (hash-set
+            (date-time 2012 12 26)
+            (date-time 2012 12 28)
+            (date-time 2013 1  16))]
+         (cluster distance test-dataset 31 3))))
