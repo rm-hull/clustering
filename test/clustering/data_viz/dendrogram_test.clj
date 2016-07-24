@@ -24,10 +24,12 @@
   (:require
     [clojure.test :refer :all]
     [clojure.java.io :as io]
-    [digest]
     [clustering.core.hierarchical :refer :all]
     [clustering.data-viz.dendrogram :refer :all]
-    [clustering.data-viz.image :refer :all]))
+    [clustering.data-viz.image :refer :all])
+  (:import
+    [java.awt.image BufferedImage]
+    [javax.imageio ImageIO]))
 
 (def test-data
   (bi-cluster
@@ -74,9 +76,13 @@
 (deftest check->img
   (let [tmp-file "test/data/__tmp.png"]
     (try
+      ;; Due to platform differences in how fonts are rendered, there is not
+      ;; much more than we can do to check the image loads ok, and that the
+      ;; size is as expected
       (write-png tmp-file (->img test-data))
-      (is (= (digest/md5 (io/as-file tmp-file))
-             (digest/md5 (io/as-file "test/data/dendrogram.png"))))
+      (let [^BufferedImage img (ImageIO/read (io/file tmp-file))]
+        (is (= 1024 (.getWidth img)))
+        (is (= 80 (.getHeight img))))
     (finally
       (io/delete-file tmp-file)))))
 
