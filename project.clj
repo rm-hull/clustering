@@ -21,8 +21,7 @@
       :global-vars {*warn-on-reflection* true}
       :dependencies [
         [org.clojure/test.check "0.9.0"]
-        [clj-time "0.12.0"]
-        [digest "1.4.4"]]
+        [clj-time "0.12.0"]]
       :plugins [
         [lein-codox "0.9.5"]
         [lein-cloverage "1.0.6"]]}})
