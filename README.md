@@ -299,6 +299,13 @@ a [dendrogram](https://en.wikipedia.org/wiki/Dendrogram):
 
 ![dendrogram](https://rawgithub.com/rm-hull/clustering/master/doc/dendrogram.svg)
 
+Further examples can be found in the
+https://github.com/rm-hull/clustering/tree/master/test/clustering/examples
+directory, one of which takes a list of dictionary words and uses the
+Levenshtein distance to cluster, and produce the following dendrogram:
+
+![word-similarities](https://rawgithub.com/rm-hull/clustering/master/doc/word-similarities.svg)
+
 ## References
 
 * https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1
