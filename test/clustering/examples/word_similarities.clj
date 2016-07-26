@@ -59,4 +59,4 @@
       "doc/word-similarities.svg"
       (->svg hier-data))))
 
-(generate-word-similarities)
+;(generate-word-similarities)

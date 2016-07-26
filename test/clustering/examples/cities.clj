@@ -58,7 +58,6 @@
     dendrogram
     (spit (str "doc/" dataset-name ".svg")) ))
 
-(generate-dendrogram "us_states")
-(generate-dendrogram "uk_cities")
-(generate-dendrogram "west_german_cities")
-
+;(generate-dendrogram "us_states")
+;(generate-dendrogram "uk_cities")
+;(generate-dendrogram "west_german_cities")
