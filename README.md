@@ -306,6 +306,9 @@ Levenshtein distance to cluster, and produce the following dendrogram:
 
 ![word-similarities](https://rawgithub.com/rm-hull/clustering/master/doc/word-similarities.svg)
 
+Substituting different distance metrics (see [clj-fuzzy](http://yomguithereal.github.io/clj-fuzzy/clojure.html))
+would give different (and maybe more interesting) cluster clumps.
+
 ## References
 
 * https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1
