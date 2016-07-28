@@ -68,3 +68,20 @@
 
   [xs ys]
   (- 1.0 (correlation-coefficient xs ys)))
+
+(defn squared-distance
+
+  "The Pearson Squared distance measures the similarity in shape between two
+  profiles, but can also capture inverse relationships.
+
+  While most combinations of clustering algorithm and distance metrics provide
+  meaningful results, there are a few combinations that are difficult to
+  interpret. In particular, combining K-Means clustering with the Pearson
+  Squared distance metric can lead to non-intuitive centroid plots since the
+  centroid represents the mean of the cluster and Pearson Squared can group
+  anti-correlated objects. In these cases, visually drilling into clusters to
+  see the individual members through the use of Cluster Plots produce better
+  results."
+
+  [xs ys]
+  (- 1.0 (* 2 (correlation-coefficient xs ys))))
