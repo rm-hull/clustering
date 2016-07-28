@@ -21,6 +21,33 @@
 ;; SOFTWARE.
 
 (ns clustering.core.k-means
+
+  "K-Means clustering generates a specific number of disjoint, flat
+  (non-hierarchical) clusters. It is well suited to generating globular
+  clusters. The K-Means method is numerical, unsupervised, non-deterministic
+  and iterative.
+
+   * There are always K clusters.
+   * There is always at least one item in each cluster.
+   * The clusters are non-hierarchical and they do not overlap.
+   * Every member of a cluster is closer to its cluster than any other cluster
+     because closeness does not always involve the 'center' of clusters.
+
+  The dataset is partitioned into K clusters and the data points are randomly
+  assigned to the clusters resulting in clusters that have roughly the same
+  number of data points.  For each data point: Calculate the distance from the
+  data point to each cluster.
+
+  If the data point is closest to its own cluster, leave it where it is. If the
+  data point is not closest to its own cluster, move it into the closest
+  cluster.
+
+  Repeat the above step until a complete pass through all the data points
+  results in no data point moving from one cluster to another. At this point
+  the clusters are stable and the clustering process ends.  The choice of
+  initial partition can greatly affect the final clusters that result, in
+  terms of inter-cluster and intracluster distances and cohesion."
+
   (:refer-clojure :exclude [update]))
 
 (defn init-means [k dataset]
