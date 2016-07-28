@@ -38,6 +38,9 @@
   (:require
     [clustering.distance.common :refer :all]))
 
+(defn- div0 [x y]
+  (if (zero? y) 0 (/ x y)))
+
 (defn correlation-coefficient
 
   "Pearson product-moment correlation coefficient is a measure of the linear
@@ -49,13 +52,10 @@
   (let [len   (count xs)
         sumx  (sum xs)
         sumy  (sum ys)
-        numer (- (sum-product xs ys) (/ (* sumx sumy) len))
-        denom (Math/sqrt (* (- (sum-squares xs) (/ (sqr sumx) len))
-                            (- (sum-squares ys) (/ (sqr sumy) len))))]
-    ;(println "len=" len "sumX=" sumx "sumY=" sumy "numer=" numer "denom=" denom)
-    (if (zero? denom)
-      0
-      (/ numer denom))))
+        numer (- (sum-product xs ys) (div0 (* sumx sumy) len))
+        denom (Math/sqrt (* (- (sum-squares xs) (div0 (sqr sumx) len))
+                            (- (sum-squares ys) (div0 (sqr sumy) len))))]
+    (div0 numer denom)))
 
 (defn distance
 
