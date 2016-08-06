@@ -21,7 +21,7 @@ There is a version hosted at [Clojars](https://clojars.org/rm-hull/clustering).
 For leiningen include a dependency:
 
 ```clojure
-[rm-hull/clustering "0.1.0"]
+[rm-hull/clustering "0.1.2"]
 ```
 
 For maven-based projects, add the following to your `pom.xml`:
@@ -30,7 +30,7 @@ For maven-based projects, add the following to your `pom.xml`:
 <dependency>
   <groupId>rm-hull</groupId>
   <artifactId>clustering</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.2</version>
 </dependency>
 ```
 
