@@ -23,7 +23,8 @@
 (ns clustering.distance.pearson-test
   (:require
     [clojure.test :refer :all]
-    [clustering.distance.pearson :refer :all]))
+    [clustering.distance.pearson :refer :all]
+    [clustering.distance.common :refer [transpose]]))
 
 (def data-set
   ; Age vs. Glucose level
@@ -34,9 +35,6 @@
    [42 75]
    [57 87]
    [59 81]])
-
-(defn transpose [matrix]
-  (apply mapv vector matrix))
 
 (deftest check-correlation-coefficient
   (is (zero? (correlation-coefficient nil nil)))

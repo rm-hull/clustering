@@ -38,4 +38,5 @@
 (defn sum-squares [xs]
   (sum-product xs xs))
 
-
+(defn transpose [matrix]
+  (apply mapv vector matrix))
