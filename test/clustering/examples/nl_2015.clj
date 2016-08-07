@@ -56,4 +56,4 @@
     dendrogram
     (spit (str "doc/" dataset-name ".svg")) ))
 
-(generate-dendrogram "nl_2015")
+;(generate-dendrogram "nl_2015")
