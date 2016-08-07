@@ -320,7 +320,7 @@ would give different (and maybe more interesting) cluster clumps.
 
 [baseball-reference.com](http://www.baseball-reference.com/) has lots of
 interesting historical statistics for all major league games, one of which is
-the [2015 National League](http://www.baseball-reference.com/leagues/NL/2015.shtml):
+the [2015 National League](http://www.baseball-reference.com/leagues/NL/2015.shtml#teams_standard_batting::none):
 
 
 |Tm|#Bat|BatAge|R/G|G|PA|AB|R|H|2B|3B|HR|RBI|SB|CS|BB|SO|BA|OBP|SLG|OPS|OPS+|TB|GDP|HBP|SH|SF|IBB|LOB|
