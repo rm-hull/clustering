@@ -5,7 +5,6 @@
     :name "The MIT License (MIT)"
     :url "http://opensource.org/licenses/MIT"}
   :dependencies [
-    [org.clojure/clojure "1.8.0"]
     [org.clojure/math.combinatorics "0.1.3"]
     [hiccup "1.0.5"]]
   :scm {:url "git@github.com:rm-hull/clustering.git"}
@@ -20,9 +19,10 @@
     :dev {
       :global-vars {*warn-on-reflection* true}
       :dependencies [
+        [org.clojure/clojure "1.8.0"]
         [org.clojure/data.csv "0.1.3"]
         [org.clojure/test.check "0.9.0"]
         [clj-time "0.12.0"]]
       :plugins [
-        [lein-codox "0.9.5"]
-        [lein-cloverage "1.0.6"]]}})
+        [lein-codox "0.10.0"]
+        [lein-cloverage "1.0.7"]]}})
