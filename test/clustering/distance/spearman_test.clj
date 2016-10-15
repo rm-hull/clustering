@@ -22,10 +22,9 @@
 
 (ns clustering.distance.spearman-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.distance.spearman :refer :all]
-    [clustering.distance.common :refer [transpose]]
-    ))
+   [clojure.test :refer :all]
+   [clustering.distance.spearman :refer :all]
+   [clustering.distance.common :refer [transpose]]))
 
 (def data-set
   ; IQ vs. Hours of TV per week

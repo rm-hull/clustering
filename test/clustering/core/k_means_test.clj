@@ -22,24 +22,24 @@
 
 (ns clustering.core.k-means-test
   (:require
-    [clojure.test :refer :all]
-    [clojure.test.check :as tc]
-    [clojure.test.check.generators :as gen]
-    [clojure.test.check.properties :as prop]
-    [clojure.test.check.clojure-test :refer [defspec]]
-    [clustering.core.k-means :refer :all]
-    [clustering.test-helper :refer :all]
-    [clj-time.core :refer [date-time]]))
+   [clojure.test :refer :all]
+   [clojure.test.check :as tc]
+   [clojure.test.check.generators :as gen]
+   [clojure.test.check.properties :as prop]
+   [clojure.test.check.clojure-test :refer [defspec]]
+   [clustering.core.k-means :refer :all]
+   [clustering.test-helper :refer :all]
+   [clj-time.core :refer [date-time]]))
 
 (deftest check-init-mean
   (is (thrown-with-msg?
-        IllegalArgumentException
-        #"Cannot attempt to cluster 0 points into 4 clusters"
-        (init-means 4 [])))
+       IllegalArgumentException
+       #"Cannot attempt to cluster 0 points into 4 clusters"
+       (init-means 4 [])))
   (is (thrown-with-msg?
-        IllegalArgumentException
-        #"Cannot attempt to cluster 0 points into 4 clusters"
-        (init-means 4 nil))))
+       IllegalArgumentException
+       #"Cannot attempt to cluster 0 points into 4 clusters"
+       (init-means 4 nil))))
 
 ;(defspec init-mean-throws-err-when-not-enough-points
 ;  100
@@ -54,13 +54,13 @@
   100
   (prop/for-all [k (gen/choose 0 30)
                  pts (gen/not-empty (gen/vector gen/int 40 300))]
-    (is (= k (count (init-means k pts))))))
+                (is (= k (count (init-means k pts))))))
 
 (defspec init-mean-only-contains-pts
   100
   (prop/for-all [k (gen/choose 0 20)
                  pts (gen/not-empty (gen/vector gen/int 40 300))]
-    (is (every? (set pts) (init-means k pts)))))
+                (is (every? (set pts) (init-means k pts)))))
 
 (defn diff [a b]
   (Math/abs (- a b)))
@@ -76,26 +76,26 @@
   100
   (prop/for-all [pt gen/int
                  means (gen/not-empty (gen/list gen/int))]
-    (is (contains? (set means) (find-closest diff pt means)))))
+                (is (contains? (set means) (find-closest diff pt means)))))
 
 (defspec find-closest-always-returns-closest-mean
   100
   (prop/for-all [pt gen/int
                  means (gen/not-empty (gen/list gen/int))]
-    (let [diffs (sort-by second (map #(vector % (diff pt %)) means))]
-      (is (= (ffirst diffs) (find-closest diff pt means))))))
+                (let [diffs (sort-by second (map #(vector % (diff pt %)) means))]
+                  (is (= (ffirst diffs) (find-closest diff pt means))))))
 
 (defspec classify-should-classify-all-points
   100
   (prop/for-all [points (gen/list gen/int)
                  means (gen/list gen/int)]
-    (is (= (set points) (set (apply concat (vals (classify diff points means))))))))
+                (is (= (set points) (set (apply concat (vals (classify diff points means))))))))
 
 (defspec classify-should-map-all-means
   100
   (prop/for-all [points (gen/list gen/int)
                  means (gen/not-empty (gen/list gen/int))]
-    (is (= (set means) (set (keys (classify diff points means)))))))
+                (is (= (set means) (set (keys (classify diff points means)))))))
 
 (comment
   (def means (init-means 3 test-dataset))
@@ -103,5 +103,4 @@
   (count groups)
   (map fmt (sort (groups 0)))
   (map fmt (sort (groups 1)))
-  (map fmt (sort (groups 2)))
-)
+  (map fmt (sort (groups 2))))

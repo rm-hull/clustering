@@ -22,16 +22,16 @@
 
 (ns clustering.distance.levenshtein-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.distance.levenshtein :refer :all]))
+   [clojure.test :refer :all]
+   [clustering.distance.levenshtein :refer :all]))
 
 (deftest check-distance
-   (is (= 0 (distance nil nil)))
-   (is (= 5 (distance nil "hello")))
-   (is (= 0 (distance "hello" "hello")))
-   (is (= 1 (distance "hello" "hullo")))
-   (is (= 1 (distance "hello" "hell")))
-   (is (= 1 (distance "hello" "ello")))
-   (is (= 4 (distance "hello" "world")))
-   (is (= 4 (distance "world" "hello")))
-   (is (= 5 (distance "helpo" "world"))))
+  (is (= 0 (distance nil nil)))
+  (is (= 5 (distance nil "hello")))
+  (is (= 0 (distance "hello" "hello")))
+  (is (= 1 (distance "hello" "hullo")))
+  (is (= 1 (distance "hello" "hell")))
+  (is (= 1 (distance "hello" "ello")))
+  (is (= 4 (distance "hello" "world")))
+  (is (= 4 (distance "world" "hello")))
+  (is (= 5 (distance "helpo" "world"))))

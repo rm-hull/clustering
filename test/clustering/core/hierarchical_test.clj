@@ -22,10 +22,10 @@
 
 (ns clustering.core.hierarchical-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.core.hierarchical :refer :all]
-    [clustering.average.simple :refer :all]
-    [clustering.distance.euclidean :refer :all]))
+   [clojure.test :refer :all]
+   [clustering.core.hierarchical :refer :all]
+   [clustering.average.simple :refer :all]
+   [clustering.distance.euclidean :refer :all]))
 
 (def test-data
   (map vector [-1 7 98 22 14 19 21 3]))
@@ -40,8 +40,8 @@
                   (swap! collector conj
                          [lvl (or (:branch? clust) (:data clust))]))]
     (->>
-      (cluster distance average test-data)
-      (prefix-walk visitor))
+     (cluster distance average test-data)
+     (prefix-walk visitor))
 
     (is (= [[0 true]
             [1 true]

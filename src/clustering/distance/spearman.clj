@@ -28,21 +28,21 @@
   See: https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient"
 
   (:require
-    [clustering.distance.common :refer :all]))
+   [clustering.distance.common :refer :all]))
 
 (defn rank-by [key data]
   (map #(assoc %1 (keyword (str "rank-" (name key))) %2)
-    (sort-by key data)
-    (iterate inc 1)))
+       (sort-by key data)
+       (iterate inc 1)))
 
 (defn correlation-coefficient [xs ys]
   (let [n         (count xs)
         sum-d-sqr (->>
-                    (map #(hash-map :x %1 :y %2) xs ys)
-                    (rank-by :y)
-                    (rank-by :x)
-                    (map #(sqr (- (:rank-x %) (:rank-y %))))
-                    sum)]
+                   (map #(hash-map :x %1 :y %2) xs ys)
+                   (rank-by :y)
+                   (rank-by :x)
+                   (map #(sqr (- (:rank-x %) (:rank-y %))))
+                   sum)]
     (if (zero? n)
       0
       (- 1 (/ (* 6 sum-d-sqr) (* n (dec (sqr n))))))))

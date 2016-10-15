@@ -22,12 +22,12 @@
 
 (ns clustering.data-viz.dendrogram
   (:require
-    [clojure.string :refer [join]]
-    [hiccup.core :refer [html]]
-    [clustering.data-viz.image :refer :all])
+   [clojure.string :refer [join]]
+   [hiccup.core :refer [html]]
+   [clustering.data-viz.image :refer :all])
   (:import
-    [java.awt.geom AffineTransform GeneralPath]
-    [java.awt Graphics2D Color BasicStroke]))
+   [java.awt.geom AffineTransform GeneralPath]
+   [java.awt Graphics2D Color BasicStroke]))
 
 (defn height
   "Counts the number of leaf (non-branch) nodes in the cluster"
@@ -50,9 +50,9 @@
   (let [width 1024
         margin 150
         depth (depth cluster)]
-    { :h (* item-height (height cluster))
-      :w width
-      :scaling (if (zero? depth) 0 (double (/ (- width margin) depth)))}))
+    {:h (* item-height (height cluster))
+     :w width
+     :scaling (if (zero? depth) 0 (double (/ (- width margin) depth)))}))
 
 (defn draw-node [draw-branch-fn draw-text-fn cluster x y scaling]
   (if (:branch? cluster)
@@ -70,28 +70,28 @@
 
 (defn ->img
   ([cluster]
-    (->img cluster str))
+   (->img cluster str))
 
   ([cluster render-fn]
-    (let [{:keys [w h scaling]} (calc-bounds cluster)
-          img (create-image w h)
-          g2d (create-graphics img)
-          text-fn  (fn [data ^long x ^long y]
-                         (.drawString g2d ^String (render-fn data) x y))
-          brnch-fn (fn [top right bottom left]
-                         (doto g2d
-                           (.drawLine left top left bottom)
-                           (.drawLine left top right top)
-                           (.drawLine left bottom right bottom)))]
-      (doto g2d
-        (.setBackground Color/WHITE)
-        (.setColor Color/BLACK)
-        (.clearRect 0 0 w h)
-        (.setStroke (BasicStroke. 1))
-        (.drawLine 0 (/ h 2) 10 (/ h 2)))
-      (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
-      (.dispose g2d)
-      img)))
+   (let [{:keys [w h scaling]} (calc-bounds cluster)
+         img (create-image w h)
+         g2d (create-graphics img)
+         text-fn  (fn [data ^long x ^long y]
+                    (.drawString g2d ^String (render-fn data) x y))
+         brnch-fn (fn [top right bottom left]
+                    (doto g2d
+                      (.drawLine left top left bottom)
+                      (.drawLine left top right top)
+                      (.drawLine left bottom right bottom)))]
+     (doto g2d
+       (.setBackground Color/WHITE)
+       (.setColor Color/BLACK)
+       (.clearRect 0 0 w h)
+       (.setStroke (BasicStroke. 1))
+       (.drawLine 0 (/ h 2) 10 (/ h 2)))
+     (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
+     (.dispose g2d)
+     img)))
 
 (defn round
   "Round a double to the given precision (number of significant digits)"
@@ -102,43 +102,43 @@
 
 (defn polyline [line-style points]
   [:polyline
-    {:points (join "," (map (round 2) points))
-     :style line-style}])
+   {:points (join "," (map (round 2) points))
+    :style line-style}])
 
 (defn ->svg
   ([cluster]
-    (->svg cluster str))
+   (->svg cluster str))
 
   ([cluster render-fn]
-    (->svg cluster render-fn
-           {:font-family "sans-serif"
-            :line-style "fill:none;stroke:black;stroke-width:2"}))
+   (->svg cluster render-fn
+          {:font-family "sans-serif"
+           :line-style "fill:none;stroke:black;stroke-width:2"}))
 
   ([cluster render-fn options]
-    (let [{:keys [w h scaling]} (calc-bounds cluster)
-          line-style (:line-style options)
-          font-family (:font-family options)
-          collector  (atom [:g])
-          text-fn    (fn [data ^long x ^long y]
-                       (swap! collector conj
-                              [:text
-                               {:x x :y y :font-family font-family}
-                               (render-fn data)]))
-          brnch-fn   (fn [top right bottom left]
-                       (swap! collector conj
-                              (polyline
-                                line-style
-                                [right top left top left bottom right bottom])))]
-    (swap! collector conj
-           (polyline line-style [ 0 (/ h 2) 10 (/ h 2)]))
-    (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
-    (html
+   (let [{:keys [w h scaling]} (calc-bounds cluster)
+         line-style (:line-style options)
+         font-family (:font-family options)
+         collector  (atom [:g])
+         text-fn    (fn [data ^long x ^long y]
+                      (swap! collector conj
+                             [:text
+                              {:x x :y y :font-family font-family}
+                              (render-fn data)]))
+         brnch-fn   (fn [top right bottom left]
+                      (swap! collector conj
+                             (polyline
+                              line-style
+                              [right top left top left bottom right bottom])))]
+     (swap! collector conj
+            (polyline line-style [0 (/ h 2) 10 (/ h 2)]))
+     (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
+     (html
       [:svg
-       { :xmlns "http://www.w3.org/2000/svg"
-         :xmlns:xlink "http://www.w3.org/1999/xlink"
-         :width w :height h
-         :zoomAndPan "magnify"
-         :preserveAspectRatio "xMidYMid meet"
-         :overflow "visible"
-         :version "1.0" }
+       {:xmlns "http://www.w3.org/2000/svg"
+        :xmlns:xlink "http://www.w3.org/1999/xlink"
+        :width w :height h
+        :zoomAndPan "magnify"
+        :preserveAspectRatio "xMidYMid meet"
+        :overflow "visible"
+        :version "1.0"}
        @collector]))))

@@ -22,9 +22,9 @@
 
 (ns clustering.distance.pearson-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.distance.pearson :refer :all]
-    [clustering.distance.common :refer [transpose]]))
+   [clojure.test :refer :all]
+   [clustering.distance.pearson :refer :all]
+   [clustering.distance.common :refer [transpose]]))
 
 (def data-set
   ; Age vs. Glucose level

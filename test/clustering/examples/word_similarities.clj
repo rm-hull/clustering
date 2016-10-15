@@ -22,14 +22,14 @@
 
 (ns clustering.examples.word-similarities
   (:require
-    [clojure.string :as s]
-    [clojure.data.csv :as csv]
-    [clojure.java.io :as io]
-    [clustering.core.hierarchical :refer :all]
-    [clustering.average.simple :refer :all]
-    [clustering.distance.levenshtein :refer :all]
-    [clustering.data-viz.dendrogram :refer :all]
-    [clustering.data-viz.image :refer :all]))
+   [clojure.string :as s]
+   [clojure.data.csv :as csv]
+   [clojure.java.io :as io]
+   [clustering.core.hierarchical :refer :all]
+   [clustering.average.simple :refer :all]
+   [clustering.distance.levenshtein :refer :all]
+   [clustering.data-viz.dendrogram :refer :all]
+   [clustering.data-viz.image :refer :all]))
 
 (defn avg-ch [letters]
   (char  (/ (reduce + (map int letters)) (count letters))))
@@ -39,9 +39,9 @@
 
 (defn load-words [filename]
   (->>
-    (slurp filename)
-    s/split-lines
-    (map #(s/replace (s/lower-case %) #"\W" ""))))
+   (slurp filename)
+   s/split-lines
+   (map #(s/replace (s/lower-case %) #"\W" ""))))
 
 (defn length [n]
   (fn [word]
@@ -49,14 +49,14 @@
 
 (defn generate-word-similarities []
   (let [data-set (->>
-                   (load-words "test/data/en-GB/words")
-                   (drop 2000)
-                   (take-nth 50)
-                   (filter (length 6))
-                   (take 200))
+                  (load-words "test/data/en-GB/words")
+                  (drop 2000)
+                  (take-nth 50)
+                  (filter (length 6))
+                  (take 200))
         hier-data (cluster distance avg-word data-set)]
     (spit
-      "doc/word-similarities.svg"
-      (->svg hier-data))))
+     "doc/word-similarities.svg"
+     (->svg hier-data))))
 
 ;(generate-word-similarities)

@@ -33,14 +33,14 @@
 
 (def distance
   (memoize
-    (fn [str1 str2]
-      (let [len1 (count str1)
-            len2 (count str2)]
-        (cond (zero? len1) len2
-              (zero? len2) len1
-              :else
-              (let [cost (if (= (first str1) (first str2)) 0 1)]
-                (min (inc (distance (rest str1) str2))
-                     (inc (distance str1 (rest str2)))
-                     (+ cost
-                        (distance (rest str1) (rest str2))))))))))
+   (fn [str1 str2]
+     (let [len1 (count str1)
+           len2 (count str2)]
+       (cond (zero? len1) len2
+             (zero? len2) len1
+             :else
+             (let [cost (if (= (first str1) (first str2)) 0 1)]
+               (min (inc (distance (rest str1) str2))
+                    (inc (distance str1 (rest str2)))
+                    (+ cost
+                       (distance (rest str1) (rest str2))))))))))

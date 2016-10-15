@@ -22,8 +22,8 @@
 
 (ns clustering.distance.euclidean-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.distance.euclidean :refer :all]))
+   [clojure.test :refer :all]
+   [clustering.distance.euclidean :refer :all]))
 
 (defn harness [expected func]
   (is (zero? (func [] [])))
@@ -34,7 +34,7 @@
   (is (= expected (func [3 2] [-1 -1]))))
 
 (deftest check-metrics
-   (harness 5.0 distance)
-   (harness 25 quadrance)
-   (harness 7 manhattan)
-   (harness 4 chebyshev))
+  (harness 5.0 distance)
+  (harness 25 quadrance)
+  (harness 7 manhattan)
+  (harness 4 chebyshev))

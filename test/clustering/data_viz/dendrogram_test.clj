@@ -22,24 +22,24 @@
 
 (ns clustering.data-viz.dendrogram-test
   (:require
-    [clojure.test :refer :all]
-    [clojure.java.io :as io]
-    [clustering.core.hierarchical :refer :all]
-    [clustering.data-viz.dendrogram :refer :all]
-    [clustering.data-viz.image :refer :all])
+   [clojure.test :refer :all]
+   [clojure.java.io :as io]
+   [clustering.core.hierarchical :refer :all]
+   [clustering.data-viz.dendrogram :refer :all]
+   [clustering.data-viz.image :refer :all])
   (:import
-    [java.awt.image BufferedImage]
-    [javax.imageio ImageIO]))
+   [java.awt.image BufferedImage]
+   [javax.imageio ImageIO]))
 
 (def test-data
   (bi-cluster
-    :root
-    [(bi-cluster :l1
-       [(bi-cluster :ll2)
-        (bi-cluster :lr2)] 10)
-     (bi-cluster :r1
-       [(bi-cluster :rl2)
-        (bi-cluster :rr2)] 9)] 15))
+   :root
+   [(bi-cluster :l1
+                [(bi-cluster :ll2)
+                 (bi-cluster :lr2)] 10)
+    (bi-cluster :r1
+                [(bi-cluster :rl2)
+                 (bi-cluster :rr2)] 9)] 15))
 
 (deftest check-height
   (is (= 4 (height test-data)))
@@ -83,7 +83,6 @@
       (let [^BufferedImage img (ImageIO/read (io/file tmp-file))]
         (is (= 1024 (.getWidth img)))
         (is (= 80 (.getHeight img))))
-    (finally
-      (io/delete-file tmp-file)))))
-
+      (finally
+        (io/delete-file tmp-file)))))
 

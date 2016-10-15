@@ -22,41 +22,41 @@
 
 (ns clustering.examples.cities
   (:require
-    [clojure.data.csv :as csv]
-    [clojure.java.io :as io]
-    [clustering.core.hierarchical :refer :all]
-    [clustering.average.simple :refer :all]
-    [clustering.distance.euclidean :refer :all]
-    [clustering.data-viz.dendrogram :refer :all]
-    [clustering.data-viz.image :refer :all]))
+   [clojure.data.csv :as csv]
+   [clojure.java.io :as io]
+   [clustering.core.hierarchical :refer :all]
+   [clustering.average.simple :refer :all]
+   [clustering.distance.euclidean :refer :all]
+   [clustering.data-viz.dendrogram :refer :all]
+   [clustering.data-viz.image :refer :all]))
 
 ; Not explicit tests as such, more examples...
 
 (defn convert-row [record]
   {:name (record 0)
-   :coords [(Double/parseDouble (record 1)) (Double/parseDouble (record 2)) ]})
+   :coords [(Double/parseDouble (record 1)) (Double/parseDouble (record 2))]})
 
 (defn load-csv [filename]
   (with-open [in-file (io/reader filename)]
     (doall
-      (map convert-row
-        (csv/read-csv in-file)))))
+     (map convert-row
+          (csv/read-csv in-file)))))
 
 (defn dist [rec1 rec2]
   (distance (:coords rec1) (:coords rec2)))
 
 (defn avg [recs]
-  { :name "n/a" :coords (average (map :coords recs))})
+  {:name "n/a" :coords (average (map :coords recs))})
 
 (defn dendrogram [hier-data]
   (->svg hier-data :name))
 
 (defn generate-dendrogram [dataset-name]
   (->>
-    (load-csv (str "test/data/" dataset-name ".csv"))
-    (cluster dist avg)
-    dendrogram
-    (spit (str "doc/" dataset-name ".svg")) ))
+   (load-csv (str "test/data/" dataset-name ".csv"))
+   (cluster dist avg)
+   dendrogram
+   (spit (str "doc/" dataset-name ".svg"))))
 
 ;(generate-dendrogram "us_states")
 ;(generate-dendrogram "uk_cities")

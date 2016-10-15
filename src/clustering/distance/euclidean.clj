@@ -25,7 +25,7 @@
   straight-line) distance between two points in Euclidean space."
 
   (:require
-    [clustering.distance.common :refer :all]))
+   [clustering.distance.common :refer :all]))
 
 (defn quadrance
 

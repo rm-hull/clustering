@@ -22,8 +22,8 @@
 
 (ns clustering.distance.common-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.distance.common :refer :all]))
+   [clojure.test :refer :all]
+   [clustering.distance.common :refer :all]))
 
 (deftest check-sum
   (is (= 0 (sum nil)))
@@ -41,11 +41,11 @@
   (is (= 9.869587728099999 (sqr 3.14159))))
 
 (deftest check-sum-product
-   (is (= 0 (sum-product nil nil)))
-   (is (= 2 (sum-product [1] [2 3])))
-   (is (= 14 (sum-product [1 4] [2 3]))))
+  (is (= 0 (sum-product nil nil)))
+  (is (= 2 (sum-product [1] [2 3])))
+  (is (= 14 (sum-product [1 4] [2 3]))))
 
 (deftest check-sum-squares
-   (is (= 0 (sum-squares nil)))
-   (is (= 13 (sum-squares [2 3])))
-   (is (= 55 (sum-squares [1 2 3 4 5]))))
+  (is (= 0 (sum-squares nil)))
+  (is (= 13 (sum-squares [2 3])))
+  (is (= 55 (sum-squares [1 2 3 4 5]))))

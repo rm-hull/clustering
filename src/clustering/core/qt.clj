@@ -39,7 +39,7 @@
   4) Repeat with the reduced set of points until no more cluster can
      be formed having the minimum cluster size."
   (:require
-    [clojure.set :refer [difference]]))
+   [clojure.set :refer [difference]]))
 
 (defn candidate-cluster
 
@@ -55,10 +55,10 @@
   "Finds the largest cluster with the most members"
 
   (->>
-    dataset
-    (map #(candidate-cluster distance-fn % dataset threshold))
-    (sort-by count >)
-    first))
+   dataset
+   (map #(candidate-cluster distance-fn % dataset threshold))
+   (sort-by count >)
+   first))
 
 (defn cluster
 
@@ -76,6 +76,6 @@
       (if (< (count best) min-size)
         clusters
         (recur
-          (conj clusters best)
-          (difference uniq best))))))
+         (conj clusters best)
+         (difference uniq best))))))
 

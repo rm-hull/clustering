@@ -22,13 +22,13 @@
 
 (ns clustering.examples.nl-2015
   (:require
-    [clojure.data.csv :as csv]
-    [clojure.java.io :as io]
-    [clustering.core.hierarchical :refer :all]
-    [clustering.average.simple :refer :all]
-    [clustering.distance.pearson :refer :all]
-    [clustering.data-viz.dendrogram :refer :all]
-    [clustering.data-viz.image :refer :all]))
+   [clojure.data.csv :as csv]
+   [clojure.java.io :as io]
+   [clustering.core.hierarchical :refer :all]
+   [clustering.average.simple :refer :all]
+   [clustering.distance.pearson :refer :all]
+   [clustering.data-viz.dendrogram :refer :all]
+   [clustering.data-viz.image :refer :all]))
 
 (defn convert-row [record]
   {:name (first record)
@@ -37,23 +37,23 @@
 (defn load-csv [filename]
   (with-open [in-file (io/reader filename)]
     (let [[header & data] (csv/read-csv in-file)]
-    (doall
-      (map convert-row data)))))
+      (doall
+       (map convert-row data)))))
 
 (defn dist [rec1 rec2]
   (distance (:data rec1) (:data rec2)))
 
 (defn avg [recs]
-  { :name "n/a" :data (average (map :data recs))})
+  {:name "n/a" :data (average (map :data recs))})
 
 (defn dendrogram [hier-data]
   (->svg hier-data :name))
 
 (defn generate-dendrogram [dataset-name]
   (->>
-    (load-csv (str "test/data/" dataset-name ".csv"))
-    (cluster dist avg)
-    dendrogram
-    (spit (str "doc/" dataset-name ".svg")) ))
+   (load-csv (str "test/data/" dataset-name ".csv"))
+   (cluster dist avg)
+   dendrogram
+   (spit (str "doc/" dataset-name ".svg"))))
 
 ;(generate-dendrogram "nl_2015")

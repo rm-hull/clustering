@@ -64,32 +64,32 @@
   difference between them)."
   [distance-fn point means]
   (second
-    (reduce
-      (fn [state curr]
-        (let [dist (distance-fn point curr)]
-          (if (< dist (or (first state) Integer/MAX_VALUE))
-            [dist curr]
-            state)))
-      []
-      means)))
+   (reduce
+    (fn [state curr]
+      (let [dist (distance-fn point curr)]
+        (if (< dist (or (first state) Integer/MAX_VALUE))
+          [dist curr]
+          state)))
+    []
+    means)))
 
 (defn classify [distance-fn dataset means]
   (merge
-    (into {} (map #(vector % nil) means))
-    (group-by #(find-closest distance-fn % means) dataset)))
+   (into {} (map #(vector % nil) means))
+   (group-by #(find-closest distance-fn % means) dataset)))
 
 (defn update [average-fn classified old-means]
   (map
-    (fn [mean]
+   (fn [mean]
      (if-let [points (classified mean)]
        (average-fn points)
        mean))
-     old-means))
+   old-means))
 
 (defn converged? [distance-fn eta old-means new-means]
   (every?
-    #(<= % eta)
-    (map distance-fn old-means new-means)))
+   #(<= % eta)
+   (map distance-fn old-means new-means)))
 
 (defn centroids [distance-fn average-fn dataset means eta]
   (let [clusters (classify distance-fn dataset means)
@@ -100,7 +100,7 @@
 
 (defn cluster [distance-fn average-fn dataset means eta]
   (->>
-    (centroids distance-fn average-fn dataset means eta)
-    (classify distance-fn dataset)
-    vals
-    vec))
+   (centroids distance-fn average-fn dataset means eta)
+   (classify distance-fn dataset)
+   vals
+   vec))

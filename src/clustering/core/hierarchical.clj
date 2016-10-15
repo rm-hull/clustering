@@ -22,7 +22,7 @@
 
 (ns clustering.core.hierarchical
   (:require
-    [clojure.math.combinatorics :refer [combinations]]))
+   [clojure.math.combinatorics :refer [combinations]]))
 
 (defrecord BiCluster [branch? data left right distance])
 
@@ -35,18 +35,18 @@
 
   [distance-fn points]
   (reduce
-    (fn [state curr]
-      (let [dist (apply distance-fn curr)]
-        (if (< dist (or (first state) Integer/MAX_VALUE))
-          [dist curr]
-          state)))
-    []
-    (combinations points 2)))
+   (fn [state curr]
+     (let [dist (apply distance-fn curr)]
+       (if (< dist (or (first state) Integer/MAX_VALUE))
+         [dist curr]
+         state)))
+   []
+   (combinations points 2)))
 
 (defn cluster [distance-fn average-fn dataset]
   (let [distance-fn (memoize
-                      (fn [clust1 clust2]
-                        (distance-fn (:data clust1) (:data clust2))))]
+                     (fn [clust1 clust2]
+                       (distance-fn (:data clust1) (:data clust2))))]
     (loop [clusters (set (map bi-cluster dataset))]
       (if (<= (count clusters) 1)
         (first clusters)
@@ -54,9 +54,9 @@
               averaged-data (average-fn (map :data lowest-pair))
               new-cluster (bi-cluster averaged-data lowest-pair closest)]
           (recur
-            (->
-              (apply disj clusters lowest-pair)
-              (conj new-cluster))))))))
+           (->
+            (apply disj clusters lowest-pair)
+            (conj new-cluster))))))))
 
 (defn prefix-walk
   ([visitor-fn clust]

@@ -26,6 +26,6 @@
   (let [denom (count dataset)]
     (if (pos? denom)
       (->>
-        dataset
-        (apply map +)
-        (map #(double (/ % denom)))))))
+       dataset
+       (apply map +)
+       (map #(double (/ % denom)))))))

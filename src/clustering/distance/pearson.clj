@@ -36,7 +36,7 @@
   See: https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient"
 
   (:require
-    [clustering.distance.common :refer :all]))
+   [clustering.distance.common :refer :all]))
 
 (defn- div0 [x y]
   (if (zero? y) 0 (/ x y)))

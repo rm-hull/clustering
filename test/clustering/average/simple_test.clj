@@ -22,8 +22,8 @@
 
 (ns clustering.average.simple-test
   (:require
-    [clojure.test :refer :all]
-    [clustering.average.simple :refer :all]))
+   [clojure.test :refer :all]
+   [clustering.average.simple :refer :all]))
 
 (deftest check-average
   (is (nil? (average nil)))

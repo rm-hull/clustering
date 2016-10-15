@@ -22,10 +22,10 @@
 
 (ns clustering.data-viz.image
   (:import
-    [java.awt Color Graphics2D RenderingHints BasicStroke GraphicsEnvironment]
-    [java.awt.image BufferedImage]
-    [java.awt.geom AffineTransform GeneralPath]
-    [javax.imageio ImageIO]))
+   [java.awt Color Graphics2D RenderingHints BasicStroke GraphicsEnvironment]
+   [java.awt.image BufferedImage]
+   [java.awt.geom AffineTransform GeneralPath]
+   [javax.imageio ImageIO]))
 
 (defn ^BufferedImage create-image [w h]
   (BufferedImage. w h BufferedImage/TYPE_INT_ARGB))
