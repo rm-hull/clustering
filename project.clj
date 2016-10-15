@@ -14,7 +14,7 @@
     :source-paths ["src"]
     :output-path "doc/api"
     :source-uri "http://github.com/rm-hull/clustering/blob/master/{filepath}#L{line}"  }
-  :min-lein-version "2.6.1"
+  :min-lein-version "2.7.1"
   :profiles {
     :dev {
       :global-vars {*warn-on-reflection* true}
@@ -25,4 +25,5 @@
         [clj-time "0.12.0"]]
       :plugins [
         [lein-codox "0.10.0"]
+        [lein-cljfmt "0.5.6"]
         [lein-cloverage "1.0.7"]]}})
