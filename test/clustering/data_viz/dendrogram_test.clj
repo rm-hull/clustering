@@ -64,12 +64,6 @@
   (is (= 3.14  ((round 2) 3.14159)))
   (is (= 3.142 ((round 3) 3.14159))))
 
-(deftest check-polyline
-  (is (= [:polyline
-          {:points "1.23,4.57,7.89,10.11"
-           :style "some-styles"}]
-         (polyline "some-styles", [1.23456, 4.56789, 7.890123, 10.111213]))))
-
 (deftest check->svg
   (is (= (slurp "test/data/dendrogram.svg") (->svg test-data))))
 

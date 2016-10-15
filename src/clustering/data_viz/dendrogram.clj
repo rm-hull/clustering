@@ -23,7 +23,7 @@
 (ns clustering.data-viz.dendrogram
   (:require
    [clojure.string :refer [join]]
-   [hiccup.core :refer [html]]
+   [helpmate.svg :refer [svg g text polyline]]
    [clustering.data-viz.image :refer :all])
   (:import
    [java.awt.geom AffineTransform GeneralPath]
@@ -100,10 +100,12 @@
     (let [factor (Math/pow 10 precision)]
       (/ (Math/round (* d factor)) factor))))
 
-(defn polyline [line-style points]
-  [:polyline
-   {:points (join "," (map (round 2) points))
-    :style line-style}])
+
+(defn- format-points [points]
+  (->>
+    points
+    (map (round 2))
+    (join ",")))
 
 (defn ->svg
   ([cluster]
@@ -118,27 +120,26 @@
    (let [{:keys [w h scaling]} (calc-bounds cluster)
          line-style (:line-style options)
          font-family (:font-family options)
-         collector  (atom [:g])
+         collector  (atom [])
          text-fn    (fn [data ^long x ^long y]
                       (swap! collector conj
-                             [:text
-                              {:x x :y y :font-family font-family}
-                              (render-fn data)]))
+                             (text :x x :y y :font-family font-family (render-fn data))))
          brnch-fn   (fn [top right bottom left]
                       (swap! collector conj
                              (polyline
-                              line-style
-                              [right top left top left bottom right bottom])))]
+                              :points (format-points [right top left top left bottom right bottom])
+                              :style line-style)))]
      (swap! collector conj
-            (polyline line-style [0 (/ h 2) 10 (/ h 2)]))
+            (polyline
+              :points (format-points [0 (/ h 2) 10 (/ h 2)])
+              :style line-style))
      (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
-     (html
-      [:svg
-       {:xmlns "http://www.w3.org/2000/svg"
-        :xmlns:xlink "http://www.w3.org/1999/xlink"
-        :width w :height h
-        :zoomAndPan "magnify"
-        :preserveAspectRatio "xMidYMid meet"
-        :overflow "visible"
-        :version "1.0"}
-       @collector]))))
+     (svg
+       :xmlns "http://www.w3.org/2000/svg"
+       :xmlns:xlink "http://www.w3.org/1999/xlink"
+       :width w :height h
+       :zoomAndPan "magnify"
+       :preserveAspectRatio "xMidYMid meet"
+       :overflow "visible"
+       :version "1.0"
+       (g @collector)))))
