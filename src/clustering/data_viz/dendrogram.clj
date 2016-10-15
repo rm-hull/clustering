@@ -100,12 +100,11 @@
     (let [factor (Math/pow 10 precision)]
       (/ (Math/round (* d factor)) factor))))
 
-
 (defn- format-points [points]
   (->>
-    points
-    (map (round 2))
-    (join ",")))
+   points
+   (map (round 2))
+   (join ",")))
 
 (defn ->svg
   ([cluster]
@@ -131,15 +130,15 @@
                               :style line-style)))]
      (swap! collector conj
             (polyline
-              :points (format-points [0 (/ h 2) 10 (/ h 2)])
-              :style line-style))
+             :points (format-points [0 (/ h 2) 10 (/ h 2)])
+             :style line-style))
      (draw-node brnch-fn text-fn cluster 10 (/ h 2) scaling)
      (svg
-       :xmlns "http://www.w3.org/2000/svg"
-       :xmlns:xlink "http://www.w3.org/1999/xlink"
-       :width w :height h
-       :zoomAndPan "magnify"
-       :preserveAspectRatio "xMidYMid meet"
-       :overflow "visible"
-       :version "1.0"
-       (g @collector)))))
+      :xmlns "http://www.w3.org/2000/svg"
+      :xmlns:xlink "http://www.w3.org/1999/xlink"
+      :width w :height h
+      :zoomAndPan "magnify"
+      :preserveAspectRatio "xMidYMid meet"
+      :overflow "visible"
+      :version "1.0"
+      (g @collector)))))
