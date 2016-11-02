@@ -22,8 +22,8 @@
         [org.clojure/clojure "1.8.0"]
         [org.clojure/data.csv "0.1.3"]
         [org.clojure/test.check "0.9.0"]
-        [clj-time "0.12.0"]]
+        [clj-time "0.12.2"]]
       :plugins [
-        [lein-codox "0.10.0"]
+        [lein-codox "0.10.1"]
         [lein-cljfmt "0.5.6"]
-        [lein-cloverage "1.0.7"]]}})
+        [lein-cloverage "1.0.9"]]}})
