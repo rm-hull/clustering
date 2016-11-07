@@ -6,7 +6,7 @@
     :url "http://opensource.org/licenses/MIT"}
   :dependencies [
     [org.clojure/math.combinatorics "0.1.3"]
-    [rm-hull/helpmate "0.1.1"]]
+    [rm-hull/helpmate "0.1.2"]]
   :scm {:url "git@github.com:rm-hull/clustering.git"}
   :source-paths ["src"]
   :jar-exclusions [#"(?:^|/).git"]
