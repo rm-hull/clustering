@@ -1,4 +1,4 @@
-(defproject rm-hull/clustering "0.1.3"
+(defproject rm-hull/clustering "0.1.4"
   :description "Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure."
   :url "https://github.com/rm-hull/clustering"
   :license {
@@ -6,7 +6,7 @@
     :url "http://opensource.org/licenses/MIT"}
   :dependencies [
     [org.clojure/math.combinatorics "0.1.4"]
-    [rm-hull/helpmate "0.1.3"]]
+    [rm-hull/helpmate "0.1.4"]]
   :scm {:url "git@github.com:rm-hull/clustering.git"}
   :source-paths ["src"]
   :jar-exclusions [#"(?:^|/).git"]
@@ -19,11 +19,11 @@
     :dev {
       :global-vars {*warn-on-reflection* true}
       :dependencies [
-        [org.clojure/clojure "1.8.0"]
+        [org.clojure/clojure "1.9.0"]
         [org.clojure/data.csv "0.1.4"]
         [org.clojure/test.check "0.9.0"]
-        [clj-time "0.14.0"]]
+        [clj-time "0.14.2"]]
       :plugins [
         [lein-codox "0.10.3"]
         [lein-cljfmt "0.5.7"]
-        [lein-cloverage "1.0.9"]]}})
+        [lein-cloverage "1.0.10"]]}})

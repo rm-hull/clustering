@@ -10,7 +10,7 @@ Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure
 
 ### Pre-requisites
 
-You will need [Leiningen](https://github.com/technomancy/leiningen) 2.6.1 or above installed.
+You will need [Leiningen](https://github.com/technomancy/leiningen) 2.7.1 or above installed.
 
 ### Building
 
@@ -26,7 +26,7 @@ There is a version hosted at [Clojars](https://clojars.org/rm-hull/clustering).
 For leiningen include a dependency:
 
 ```clojure
-[rm-hull/clustering "0.1.3"]
+[rm-hull/clustering "0.1.4"]
 ```
 
 For maven-based projects, add the following to your `pom.xml`:
