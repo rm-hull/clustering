@@ -4,7 +4,7 @@
 [![Dependencies Status](https://jarkeeper.com/rm-hull/clustering/status.svg)](https://jarkeeper.com/rm-hull/clustering)
 [![Downloads](https://jarkeeper.com/rm-hull/clustering/downloads.svg)](https://jarkeeper.com/rm-hull/clustering)
 [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/clustering.svg)](https://clojars.org/rm-hull/clustering)
-[![Maintenance](https://img.shields.io/maintenance/yes/2017.svg?maxAge=2592000)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2018.svg?maxAge=2592000)]()
 
 Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure.
 
