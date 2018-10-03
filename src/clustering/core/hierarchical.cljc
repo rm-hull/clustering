@@ -37,7 +37,8 @@
   (reduce
    (fn [state curr]
      (let [dist (apply distance-fn curr)]
-       (if (< dist (or (first state) Integer/MAX_VALUE))
+       (if (< dist (or (first state) #?(:clj Integer/MAX_VALUE
+                                        :cljs (.-MAX_SAFE_INTEGER js/Number))))
          [dist curr]
          state)))
    []
@@ -67,4 +68,3 @@
      (visitor-fn clust level)
      (prefix-walk visitor-fn (:left clust) (inc level))
      (prefix-walk visitor-fn (:right clust) (inc level)))))
-

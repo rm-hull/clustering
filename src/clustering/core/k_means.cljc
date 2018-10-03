@@ -52,7 +52,8 @@
 
 (defn init-means [k dataset]
   (if (> k (count dataset))
-    (throw (IllegalArgumentException. (str "Cannot attempt to cluster " (count dataset) " points into " k " clusters")))
+    (throw #?(:clj (IllegalArgumentException. (str "Cannot attempt to cluster " (count dataset) " points into " k " clusters"))
+              :cljs (js/Error. (str "Cannot attempt to cluster " (count dataset) " points into " k " clusters"))))
     (let [arr (vec dataset)
           n   (count arr)]
       (for [i (range k)]
@@ -67,7 +68,8 @@
    (reduce
     (fn [state curr]
       (let [dist (distance-fn point curr)]
-        (if (< dist (or (first state) Integer/MAX_VALUE))
+        (if (< dist (or (first state) #?(:clj Integer/MAX_VALUE
+                                         :cljs (.-MAX_SAFE_INTEGER js/Number))))
           [dist curr]
           state)))
     []
