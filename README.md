@@ -6,7 +6,7 @@
 [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/clustering.svg)](https://clojars.org/rm-hull/clustering)
 [![Maintenance](https://img.shields.io/maintenance/yes/2018.svg?maxAge=2592000)]()
 
-Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure.
+Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure/Clojurescript.
 
 ### Pre-requisites
 
@@ -26,7 +26,7 @@ There is a version hosted at [Clojars](https://clojars.org/rm-hull/clustering).
 For leiningen include a dependency:
 
 ```clojure
-[rm-hull/clustering "0.1.4"]
+[rm-hull/clustering "0.2.0"]
 ```
 
 For maven-based projects, add the following to your `pom.xml`:

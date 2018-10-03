@@ -1,4 +1,4 @@
-(defproject rm-hull/clustering "0.1.4"
+(defproject rm-hull/clustering "0.2.0"
   :description "Implementation of K-Means, QT and Hierarchical clustering algorithms, in Clojure."
   :url "https://github.com/rm-hull/clustering"
   :license {
@@ -22,7 +22,7 @@
         [org.clojure/clojure "1.9.0"]
         [org.clojure/data.csv "0.1.4"]
         [org.clojure/test.check "0.9.0"]
-        [clj-time "0.14.2"]]
+        [clj-time "0.14.4"]]
       :plugins [
         [lein-codox "0.10.3"]
         [lein-cljfmt "0.5.7"]
