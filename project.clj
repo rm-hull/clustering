@@ -12,9 +12,17 @@
   :jar-exclusions [#"(?:^|/).git"]
   :codox {
     :source-paths ["src"]
+    :doc-files [
+      "doc/background.md"
+      "doc/qt.md"
+      "doc/k-means.md"
+      "doc/hierarchical.md"
+      "doc/references.md"
+      "LICENSE.md"
+    ]
     :output-path "doc/api"
     :source-uri "http://github.com/rm-hull/clustering/blob/master/{filepath}#L{line}"  }
-  :min-lein-version "2.7.1"
+  :min-lein-version "2.8.1"
   :profiles {
     :dev {
       :global-vars {*warn-on-reflection* true}
@@ -24,6 +32,6 @@
         [org.clojure/test.check "0.9.0"]
         [clj-time "0.14.4"]]
       :plugins [
-        [lein-codox "0.10.3"]
-        [lein-cljfmt "0.5.7"]
-        [lein-cloverage "1.0.10"]]}})
+        [lein-codox "0.10.5"]
+        [lein-cljfmt "0.6.1"]
+        [lein-cloverage "1.0.13"]]}})
