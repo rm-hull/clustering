@@ -5,7 +5,7 @@
     :name "The MIT License (MIT)"
     :url "http://opensource.org/licenses/MIT"}
   :dependencies [
-    [org.clojure/math.combinatorics "0.1.4"]
+    [org.clojure/math.combinatorics "0.1.5"]
     [rm-hull/helpmate "0.1.4"]]
   :scm {:url "git@github.com:rm-hull/clustering.git"}
   :source-paths ["src"]
@@ -30,8 +30,8 @@
         [org.clojure/clojure "1.9.0"]
         [org.clojure/data.csv "0.1.4"]
         [org.clojure/test.check "0.9.0"]
-        [clj-time "0.14.4"]]
+        [clj-time "0.15.1"]]
       :plugins [
-        [lein-codox "0.10.5"]
-        [lein-cljfmt "0.6.1"]
-        [lein-cloverage "1.0.13"]]}})
+        [lein-codox "0.10.7"]
+        [lein-cljfmt "0.6.4"]
+        [lein-cloverage "1.1.1"]]}})
